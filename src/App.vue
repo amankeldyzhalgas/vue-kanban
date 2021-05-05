@@ -1,28 +1,45 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col form-inline">
+          <b-form-input v-model="newTask" placeholder="Enter task" @keyup.enter="add"></b-form-input>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    draggable
+  },
+  data() {
+    return {
+      newTask: "",
+      arrBacklog: [
+        {name: "test"},
+        {name: "tes1"},
+        {name: "test2"},
+        {name: "test3"},
+      ],
+      arrInProgress: [],
+      arrTestes: [],
+      arrDone: []
+    }
+  },
+  methods: {
+    add() {
+      if (this.newTask){
+        this.arrBacklog.push({name: this.newTask});
+        this.newTask="";
+      }
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
